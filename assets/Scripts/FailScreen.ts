@@ -3,7 +3,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('FailScreen')
 export class FailScreen extends Component {
-    @property({ type: Node, tooltip: "Кнопка Retry" })
+    @property({ type: Node, tooltip: "Кнопка Retry Test" })
     retryButton: Node = null;
 
     @property({ type: Node, tooltip: "Значок фейла" })
