@@ -33,6 +33,12 @@ export class PlayerController extends Component {
     @property({ type: Node, tooltip: "Колесо 2" })
     wheel2: Node = null; // Ссылка на второе колесо
 
+    @property({ type: Node, tooltip: "Колесо 3" })
+    wheel3: Node = null; // Ссылка на второе колесо
+
+    @property({ type: Node, tooltip: "Колесо 4" })
+    wheel4: Node = null; // Ссылка на второе колесо
+
     @property({ type: Node, tooltip: "Пропеллер" })
     propeller: Node = null; // Ссылка на пропеллер
 
@@ -77,6 +83,18 @@ export class PlayerController extends Component {
         }
         if (this.wheel2) {
             const wheelController = this.wheel2.getComponent(WheelController); // Используем класс WheelController
+            if (wheelController) {
+                wheelController.setRotationSpeed(this.speed / this.maxSpeed);
+            }
+        }
+        if (this.wheel3) {
+            const wheelController = this.wheel3.getComponent(WheelController); // Используем класс WheelController
+            if (wheelController) {
+                wheelController.setRotationSpeed(this.speed / this.maxSpeed);
+            }
+        }
+        if (this.wheel4) {
+            const wheelController = this.wheel4.getComponent(WheelController); // Используем класс WheelController
             if (wheelController) {
                 wheelController.setRotationSpeed(this.speed / this.maxSpeed);
             }
