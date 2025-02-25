@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Slider, Vec3, tween, UIOpacity, Label } from 'cc';
+import { _decorator, Component, Node, Slider, Vec3, tween, UIOpacity, Label, sys } from 'cc';
 import { PlayerController } from './PlayerController';
 
 const { ccclass, property } = _decorator;
@@ -23,7 +23,11 @@ export class GameManager extends Component {
 
     // Ссылка на окно проигрыша
     @property(Node)
-    failScreen: Node = null; // Добавляем ссылку на окно FailScreen
+    failScreen: Node = null;
+
+    // Ссылка на кнопку Download
+    @property(Node)
+    downloadButton: Node = null;
 
     // Настройки туториала
     @property({ tooltip: "Задержка перед повтором туториала (секунды)" })
@@ -40,8 +44,18 @@ export class GameManager extends Component {
     private hasPlayerInteracted: boolean = false;
     private initialHandPosition: Vec3 = new Vec3();
 
+    // Переменные для определения платформы
+    private isIOS: boolean = false;
+    private isAndroid: boolean = false;
+
     onLoad() {
         console.log("GameManager: onLoad"); // Отладка
+
+        // Определяем платформу
+        this.isIOS = sys.os === sys.OS.IOS;
+        this.isAndroid = sys.os === sys.OS.ANDROID;
+
+        console.log("Platform:", sys.os); // Отладка
 
         // Отключаем окно FailScreen на старте
         if (this.failScreen) {
@@ -70,6 +84,14 @@ export class GameManager extends Component {
 
         // Инициализация счета монет
         this.updateCoinLabel();
+
+    // Добавляем обработчик для кнопки Download
+    if (this.downloadButton) {
+        console.log("Download button found, adding click handler"); // Отладка
+        this.downloadButton.on('click', this.redirectToStore, this);
+    } else {
+        console.log("Download button not found!"); // Отладка
+    }
     }
 
     onSliderChange() {
@@ -97,7 +119,7 @@ export class GameManager extends Component {
         // Создаем целевые позиции в локальных координатах
         const startPos = this.initialHandPosition.clone();
         const endPos = startPos.clone();
-        endPos.y += 180; // Смещаем на 180 пикселей вверх
+        endPos.y += 200; // Смещаем на 200 пикселей вверх
 
         // Анимация движения
         tween(this.tutorialHand)
@@ -142,6 +164,23 @@ export class GameManager extends Component {
     public showFailScreen() {
         if (this.failScreen) {
             this.failScreen.active = true; // Включаем окно
+        }
+    }
+
+    public redirectToStore() {
+        console.log("RedirectToStore called"); // Отладка
+        if (this.isIOS) {
+            // Ссылка на App Store
+            window.location.href = "https://apps.apple.com/us/app/ride-master-car-builder-game/id6449224139";
+            console.log("Redirecting to App Store");
+        } else if (this.isAndroid) {
+            // Ссылка на Google Play
+            window.location.href = "https://play.google.com/store/apps/details?id=com.LuB.DeliveryConstruct&hl=en";
+            console.log("Redirecting to Google Play");
+        } else {
+            // Для Windows или других платформ
+            window.location.href = "https://play.google.com/store/apps/details?id=com.LuB.DeliveryConstruct&hl=en"; // Замени на нужную ссылку
+            console.log("Redirecting to GitHub (test link)");
         }
     }
 }

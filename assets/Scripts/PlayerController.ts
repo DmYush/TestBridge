@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, Collider, RigidBody, ERigidBodyType, Vec3, ITriggerEvent } from 'cc';
 import { BreakablePart } from './BreakablePart'; // Импортируем класс BreakablePart
-import { GameManager } from './GameManager'; // Импортируем класс GameManager
+import { FailScreen } from './FailScreen'; // Импортируем класс FailScreen
 const { ccclass, property } = _decorator;
 
 // Определяем имена слоев
@@ -22,22 +22,13 @@ export class PlayerController extends Component {
     @property({ type: Node, tooltip: "Узел машины" })
     carNode: Node = null; // Ссылка на узел машины
 
-    @property({ type: Node, tooltip: "Ссылка на GameManager" })
-    gameManagerNode: Node = null; // Это узел GameManager
+    @property({ type: FailScreen, tooltip: "Ссылка на FailScreen" })
+    failScreen: FailScreen = null; // Ссылка на FailScreen
 
     private _isMoving: boolean = true; // Флаг для управления движением
-    private gameManager: GameManager = null; // Сам компонент GameManager
 
     onLoad() {
         console.log("Я объект: ", this.node.name);
-
-        // Инициализация gameManager из узла
-        if (this.gameManagerNode) {
-            this.gameManager = this.gameManagerNode.getComponent(GameManager);
-            if (!this.gameManager) {
-                console.warn("GameManager компонент не найден на заданном узле.");
-            }
-        }
 
         // Убедимся, что RigidBody и Collider настроены правильно
         const rigidBody = this.node.getComponent(RigidBody);
@@ -57,7 +48,7 @@ export class PlayerController extends Component {
 
     update(deltaTime: number) {
         if (this._isMoving && this.speed > 0) {
-            console.log("Speed:", this.speed); // Отладка
+            //console.log("Speed:", this.speed); // Отладка
             // Обновляем позицию узла на основе скорости
             const targetPosition = this.node.position.x + this.speed * deltaTime; // Умножаем на deltaTime для плавного движения
             this.node.setPosition(new Vec3(targetPosition, this.node.position.y, this.node.position.z));
@@ -79,8 +70,8 @@ export class PlayerController extends Component {
 
             // Показываем окно проигрыша через 2 секунды
             this.scheduleOnce(() => {
-                if (this.gameManager) {
-                    this.gameManager.showFailScreen(); // Показываем окно FailScreen
+                if (this.failScreen) {
+                    this.failScreen.show(); // Вызываем метод show у FailScreen
                 }
             }, 1);
         }

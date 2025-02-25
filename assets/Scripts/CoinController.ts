@@ -58,7 +58,7 @@ export class CoinController extends Component {
     
         // Анимация к правому верхнему углу
         tween(this.node)
-            .to(1.5, { worldPosition: targetWorldPos })
+            .to(20, { worldPosition: targetWorldPos })
             .call(() => this.node.destroy())
             .start();
     

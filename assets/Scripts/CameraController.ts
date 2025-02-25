@@ -7,8 +7,8 @@ export class CameraController extends Component {
     @property(Node)
     playerNode: Node = null;
 
-    private offset: Vec3 = new Vec3(-7, 18, 18); // Смещение камеры
-    private initialRotation: Quat = Quat.fromEuler(new Quat(), -35, -23, 0); // Начальный поворот камеры
+    private offset: Vec3 = new Vec3(-12, 15, 37); // Смещение камеры
+    private initialRotation: Quat = Quat.fromEuler(new Quat(), -18, -21, 0); // Начальный поворот камеры
 
     protected start(): void {
         // Устанавливаем начальный поворот камеры
