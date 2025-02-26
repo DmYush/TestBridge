@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Slider, Vec3, tween, UIOpacity, Label, sys } from 'cc';
+import { _decorator, Component, Node, Slider, Vec3, tween, UIOpacity, Label, sys, view } from 'cc';
 import { PlayerController } from './PlayerController';
 
 const { ccclass, property } = _decorator;
@@ -48,7 +48,11 @@ export class GameManager extends Component {
     private isIOS: boolean = false;
     private isAndroid: boolean = false;
 
+    
+
     onLoad() {
+        const visibleSize = view.getVisibleSize();
+        console.log(`Ширина экрана: ${visibleSize.width}, Высота экрана: ${visibleSize.height}`);
         console.log("GameManager: onLoad"); // Отладка
 
         // Определяем платформу

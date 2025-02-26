@@ -1358,7 +1358,7 @@
     "_enabled": true,
     "__prefab": null,
     "speed": 0,
-    "maxSpeed": 13.2,
+    "maxSpeed": 2,
     "minSpeed": 0,
     "carNode": {
       "__id__": 11
@@ -2864,7 +2864,7 @@
     "_cameraComponent": {
       "__id__": 77
     },
-    "_alignCanvasWithScreen": true,
+    "_alignCanvasWithScreen": false,
     "_id": "3btJSqyfVGO7ZHbd8dLTeN"
   },
   {
@@ -2880,8 +2880,8 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
+    "_top": 5.684341886080802e-14,
+    "_bottom": 5.684341886080802e-14,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -2892,7 +2892,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 600,
     "_originalHeight": 300,
-    "_alignMode": 2,
+    "_alignMode": 1,
     "_lockFlags": 0,
     "_id": "a8OS3VFa5Ia7fVTC+0N+NE"
   },
